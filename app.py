@@ -3,6 +3,10 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+model = joblib.load("Heart project/KNN_Heart.pkl")
+scaler = joblib.load("Heart project/Scaler.pkl")
+expected_columns = joblib.load("Heart project/columns.pkl")
+
 model = joblib.load(
     r"C:\Users\acer\OneDrive\Desktop\machine learning\Heart project\KNN_Heart.pkl"
 )
