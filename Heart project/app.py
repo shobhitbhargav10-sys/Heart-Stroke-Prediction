@@ -1,32 +1,41 @@
-# Load model, scaler and columns
 import streamlit as st
 import pandas as pd
 import joblib
+
+
+# --------------------------------
+# Load model, scaler and columns
+# --------------------------------
 
 model = joblib.load("KNN_Heart.pkl")
 scaler = joblib.load("Scaler.pkl")
 expected_columns = joblib.load("columns.pkl")
 
-model = joblib.load(
-    r"C:\Users\acer\OneDrive\Desktop\machine learning\Heart project\KNN_Heart.pkl"
-)
 
-scaler = joblib.load(
-    r"C:\Users\acer\OneDrive\Desktop\machine learning\Heart project\scaler.pkl"
-)
-
-expected_columns = joblib.load(
-    r"C:\Users\acer\OneDrive\Desktop\machine learning\Heart project\columns.pkl"
-)
-
+# --------------------------------
 # Title
+# --------------------------------
+
 st.title("Heart Stroke Prediction by Shobhit!")
+
 st.markdown("Provide the following details")
 
-# Input fields
-Age = st.slider("Age", 18, 100, 40)
 
-Sex = st.selectbox("Sex", ["M", "F"])
+# --------------------------------
+# Input fields
+# --------------------------------
+
+Age = st.slider(
+    "Age",
+    18,
+    100,
+    40
+)
+
+Sex = st.selectbox(
+    "Sex",
+    ["M", "F"]
+)
 
 Chest_pain = st.selectbox(
     "Chest pain type",
@@ -48,7 +57,7 @@ Cholesterol = st.number_input(
 )
 
 Fasting_bs = st.selectbox(
-    "Fasting Blood sugar > 120 mg/dL",
+    "Fasting Blood Sugar > 120 mg/dL",
     [0, 1]
 )
 
@@ -81,7 +90,11 @@ ST_slope = st.selectbox(
     ["Up", "Flat", "Down"]
 )
 
+
+# --------------------------------
 # Prediction
+# --------------------------------
+
 if st.button("Predict"):
 
     raw_input = {
@@ -115,6 +128,7 @@ if st.button("Predict"):
     # Predict
     prediction = model.predict(scaled_input)[0]
 
+    # Display result
     if prediction == 1:
         st.error("High Risk Of Heart Disease")
     else:
